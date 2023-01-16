@@ -1,13 +1,13 @@
 #include "one_time_pad.h"
 
-void encrypt(std::vector<bool> k, std::vector<bool> m) {
-
+std::vector<bool> encrypt(const std::vector<bool>& k, const std::vector<bool>& m) {
+    return {};
 }
 
-void decrypt(std::vector<bool> k, std::vector<bool> c) {
-
+std::vector<bool> decrypt(const std::vector<bool>& k, const std::vector<bool>& c) {
+    return {};
 }
 
-void generate(uint32_t n, std::vector<bool> k) {
-
+std::vector<bool> generate(uint32_t n, const std::vector<bool>& k) {
+    return {};
 }

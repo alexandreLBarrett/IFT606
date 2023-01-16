@@ -1,6 +1,6 @@
 #include <bitset>
 #include <vector>
 
-void encrypt(std::vector<bool> k, std::vector<bool> m);
-void decrypt(std::vector<bool> k, std::vector<bool> c);
-void generate(uint32_t n, std::vector<bool> k);
+std::vector<bool> encrypt(const std::vector<bool>& k, const std::vector<bool>& m);
+std::vector<bool> decrypt(const std::vector<bool>& k, const std::vector<bool>& c);
+std::vector<bool> generate(uint32_t n, const std::vector<bool>& k);
