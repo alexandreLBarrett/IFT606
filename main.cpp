@@ -10,6 +10,7 @@
 using namespace std;
 
 int main(int argc, char** argv) {
+
     vector<string> args = { argv, argv + argc };
 
     string hex_key;
@@ -51,4 +52,5 @@ int main(int argc, char** argv) {
     } catch(key_message_length_exception&) {
         cerr << "Key is not the same length as message or cryptogram!" << endl;
     }
+
 }
