@@ -5,9 +5,6 @@
 template<class Op> 
 std::vector<uint8_t> oneTimeOperation(const std::vector<uint8_t>& a, const std::vector<uint8_t>& b, const uint8_t n, Op func) {
 
-    if (a.size() != b.size())
-        throw key_message_length_exception{};
-
     std::vector<uint8_t> result(a.size());
 
     std::transform(a.begin(), a.end(), b.begin(), result.begin(), [=] (auto i, auto j) {
