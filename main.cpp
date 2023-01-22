@@ -57,9 +57,10 @@ int main(int argc, char** argv) {
         cout << "[CRYPTOGRAM]: " << toBase64(cryptogram) << endl;
 
         // Send cryptogram to Eve
+        auto eveCryptogram = cryptogram;
 
         // Bob decrypts
-        auto decrypted_message = decrypt(gen_key, cryptogram, n);
+        auto decrypted_message = decrypt(gen_key, eveCryptogram, n);
         cout << "[DECRYPTED MESSAGE]: " << toBase64(decrypted_message) << endl;
 
     } catch(key_message_length_exception&) {
@@ -94,7 +95,13 @@ choix. Est-il possible pour Eve de modifier c en c' tel que la réponse à la
 première question lorsque Bob décrypte c'est le contraire de ce que Alice
 avait répondu ? Comment ?
 
->
-
-
+> Il est possible dépendament de l'implémentation. Dans notre implémentation,
+les chiffres vont de 0 à 9 et ils sont contigues. Cela signifit qu'Eve aurait
+une chance sur deux. Par exemple, imaginons le message 0000000000000000 pour
+un n de 64. Cela nous donne le cryptogramme : 01200034553A960. Eve, sachant
+que le premier chiffre de la séquence représente soit un 0, soit un 1, elle 
+peut modifier la valeur du premier caractère en lui ajoutant, ou retirant 1.
+Dans notre exemple, si Eve suppose qu'Alice à envoyé un 0 ou faux à la
+première question et qu'elle c' = c : ++c[0], Bob recevera alors le message
+1000000000000000 lors du décryptage.
 ============================================ */
