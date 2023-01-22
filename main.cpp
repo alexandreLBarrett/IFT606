@@ -9,6 +9,11 @@
 
 using namespace std;
 
+/* ============================================
+Réponses aux sous questions de la question #1
+sous la fonction main
+============================================ */
+
 int main(int argc, char** argv) {
 
     vector<string> args = { argv, argv + argc };
@@ -42,7 +47,7 @@ int main(int argc, char** argv) {
     }
 
     cout << "[KEY]: " << hex_key << ", [MESSAGE]: " << hex_message << endl;
-    cout << "Gen for N = " << (int)n << ": " << endl;
+    cout << "Gen for N = " << (int)n - 1  << ": " << endl;
     auto gen_key = generate(message.size(), key, n);
     cout << "[Extended Key]: " << toBase64(gen_key) << endl;
 
@@ -62,3 +67,34 @@ int main(int argc, char** argv) {
     }
 
 }
+
+
+/* ============================================
+* 
+--- Question 1.1 ---
+Si Eve, n’a aucune information sur m et k avant de voir c, est-ce qu’elle
+en apprend en voyant seulement c ?
+
+> Si Eve sais que l'algorithme de cryptage est le OTP, en ayant accès au
+cryptogramme, elle peut déduire la longueur du message.
+
+
+Si maintenant Eve apprend une telle paire (m, c), est-ce qu’elle apprend
+beaucoup d’information sur k ? De combien de telles paires aurait-elle besoin
+pour apprendre k ?
+
+> Si Eve a une paire (m, c) et a accès au N, elle peut déduire la clef.
+Si elle n'a pas accès au N, elle n'obtient pas d'information par rapport
+à la clef. Elle peut cependant déduire que le N est plus grand ou inférieur
+au nombre de lettres différentes dans m ou dans c.
+
+--- Question 1.2 ---
+Associez chacun des 16 bits du message à une question vrai-faux de votre
+choix. Est-il possible pour Eve de modifier c en c' tel que la réponse à la
+première question lorsque Bob décrypte c'est le contraire de ce que Alice
+avait répondu ? Comment ?
+
+>
+
+
+============================================ */
