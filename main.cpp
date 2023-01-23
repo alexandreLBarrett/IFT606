@@ -71,7 +71,10 @@ int main(int argc, char** argv) {
 
 
 /* ============================================
-* 
+    ==================
+    |   Question 1   |
+    ==================
+
 --- Question 1.1 ---
 Si Eve, n’a aucune information sur m et k avant de voir c, est-ce qu’elle
 en apprend en voyant seulement c ?
@@ -104,4 +107,66 @@ peut modifier la valeur du premier caractère en lui ajoutant, ou retirant 1.
 Dans notre exemple, si Eve suppose qu'Alice à envoyé un 0 ou faux à la
 première question et qu'elle c' = c : ++c[0], Bob recevera alors le message
 1000000000000000 lors du décryptage.
+
+
+    ==================
+    |   Question 2   |
+    ==================
+
+--- Question 2.1 ---
+Vous pouvez supposer qu’Alice et Bob partagent une clé privée k qui est
+secrète, intègre et authentifié. Si vous désirer faire des suppositions sur k,
+prière de les noter ici. Donner le pseudo-code d’un protocole qui permet à
+Alice d’envoyer le message m à Bob avec les propriétés suivantes:
+- Robuste
+- Confidentialité
+- Intègre
+- Authentifié
+
+> Protocole MAC :
+
+Alice et Bob s'entendent tous deux pour utiliser l'algorithme de Hashage Sha1.
+Alice et Bob on accès à une fonction d'encryption et de décryption "Encrypt" et "Decrypt".
+Alice et Bob partagent une clef "clef".
+
+La transmission de message s'effectue comme suit :
+
+message = getStringFromUser()
+hash = Sha1( concat ( message, clef ) )
+cryptogramme = Encrypt( message )
+
+messageATransmettre = concat ( cryptogramme, '.', hash )
+
+La réception s'effectue comme suit :
+
+cryptogramme, hash = messageATransmettre.split( '.' )
+message = Decrypt( cryptogramme )
+hash' = Sha1( concat ( message, clef ) )
+
+if( hash' != hash )
+    dropProtocol()
+else
+    print( message )
+
+*Note : Dans le protocole, les fonctions GenMAC, MAC et VerifMAC sont entremêlées.
+
+
+Argumentation : 
+
+> Robustesse : Si le message est modifié de quelconque manière, le cryptogramme,
+ou le hash, hash et hash' du côté de Bob seront différent et le protocole sera
+abandonné. Si ce n'est pas le cas, alors, le message sera décrypté et révelé à
+Bob. 
+
+> Confidentialité : Comme les messages envoyés sont encryptés, seulement Alice
+et Bob peuvent voir le contenu des messages.
+
+> Intégrité : Puisqu'on parle d'encryption et de décryption, les messages envoyés
+sont intègres si Alice et Bob n'abandonnent pas le protocole.
+
+> Bob peut s'assurer que le message reçu provient bien d'Alice à cause de leur clef.
+Comme Alice et Bob partagent la même clef et que cette clef est privée et secrète, en
+comparant hash et hash' avec leur clef, Bob est certain que le message vient d'Alice.
+Cela prend pour acquis qu'Alice et Bob sont les seuls à partager leur clef.
+
 ============================================ */
