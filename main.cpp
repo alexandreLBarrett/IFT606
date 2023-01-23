@@ -28,23 +28,23 @@ int main(int argc, char** argv) {
         return -2;
     }
 
-    vector<uint8_t> key = fromBase64(hex_key);
-    vector<uint8_t> message = fromBase64(hex_key);
+    key key = fromBase64(hex_key);
+    message message = fromBase64(hex_key);
 
     cout << "[KEY]: " << hex_key << ", [MESSAGE]: " << hex_message << endl;
     cout << "Gen for N = " << (int)n << ": " << endl;
-    auto gen_key = generate(n, key);
+    ::key gen_key = generate(n, key);
 
     try {
         // Alice encrypts
-        auto cryptogram = encrypt(gen_key, message);
+        ::cryptogram cryptogram = encrypt(gen_key, message);
 
         cout << "[CRYPTOGRAM]: " << toBase64(cryptogram) << endl;
 
         // Send cryptogram to Eve
 
         // Bob decrypts
-        auto decrypted_message = decrypt(gen_key, cryptogram);
+        ::message decrypted_message = decrypt(gen_key, cryptogram);
 
         cout << "[DECRYPTED MESSAGE]: " << toBase64(decrypted_message) << endl;
 
