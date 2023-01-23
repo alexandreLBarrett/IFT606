@@ -3,9 +3,9 @@
 #include <algorithm>
 
 template<class Op> 
-std::vector<uint8_t> oneTimeOperation(const std::vector<uint8_t>& a, const std::vector<uint8_t>& b, const uint8_t n, Op func) {
+operand oneTimeOperation(const operand& a, const operand& b, const uint8_t n, Op func) {
 
-    std::vector<uint8_t> result(a.size());
+    operand result(a.size());
 
     std::transform(a.begin(), a.end(), b.begin(), result.begin(), [=] (auto i, auto j) {
         return func(i, j) % n;
@@ -14,12 +14,12 @@ std::vector<uint8_t> oneTimeOperation(const std::vector<uint8_t>& a, const std::
     return result;
 }
 
-std::vector<uint8_t> encrypt(const std::vector<uint8_t>& k, const std::vector<uint8_t>& m, const uint8_t n) {
-
+cryptogram encrypt(const key& k, const message& m, const uint8_t n) {
+    
     return oneTimeOperation(m, k, n, std::plus{});
 }
 
-std::vector<uint8_t> decrypt(const std::vector<uint8_t>& k, const std::vector<uint8_t>& c, const uint8_t n) {
+message decrypt(const key& k, const cryptogram& c, const uint8_t n) {
 
     return oneTimeOperation(c, k, n,
         [&](uint8_t a, uint8_t b) {
@@ -28,9 +28,9 @@ std::vector<uint8_t> decrypt(const std::vector<uint8_t>& k, const std::vector<ui
     });
 }
 
-std::vector<uint8_t> generate(uint8_t size, const std::vector<uint8_t>& k, const uint8_t n) noexcept {
+key generate(uint8_t size, const key& k, const uint8_t n) noexcept {
 
-    std::vector<uint8_t> res{k};
+    key res{k};
     res.reserve(size);
 
     for (size_t i = 0; res.size() < size; ++i) {

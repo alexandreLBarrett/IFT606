@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
     }
 
     cout << "[KEY]: " << hex_key << ", [MESSAGE]: " << hex_message << endl;
-    cout << "Gen for N = " << (int)n - 1  << ": " << endl;
+    cout << "Gen for N = " << n - 1  << ": " << endl;
     ::key gen_key = generate(message.size(), key, n);
     cout << "[Extended Key]: " << toBase64(gen_key) << endl;
 
@@ -57,10 +57,10 @@ int main(int argc, char** argv) {
         cout << "[CRYPTOGRAM]: " << toBase64(cryptogram) << endl;
 
         // Send cryptogram to Eve
-        auto eveCryptogram = cryptogram;
+        auto eve_cryptogram = cryptogram;
 
         // Bob decrypts
-        ::message decrypted_message = decrypt(gen_key, eveCryptogram, n);
+        ::message decrypted_message = decrypt(gen_key, eve_cryptogram, n);
         cout << "[DECRYPTED MESSAGE]: " << toBase64(decrypted_message) << endl;
 
     } catch(key_message_length_exception&) {
