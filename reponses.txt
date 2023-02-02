@@ -1,0 +1,31 @@
+Q1
+
+1.a)
+
+** voir sortie du programme **
+
+1.b)
+Du point de vue d'Alice et de Bob rien ne change car ils ne peuvent pas garantir
+qu'il se parlent bel et bien directement. Il n'y a aucune signature sur les messages.
+
+1.c)
+lorsqu'Eve ne fait rien les Ka et Kb sont identiques car eve n'a pas eu 
+d'impact sur la transaction. Dans le deuxième scénario par contre, Ka et Kb ne sont
+pas les mêmes car Alice partage un secret avec Eve et Eve avec Bob. Alice et Bob n'ont donc 
+pas le même secret
+
+
+1.d)
+
+Q2
+
+2.a)
+2.b)
+2.c)
+2.d)
+
+Q3
+
+3.a)
+
+

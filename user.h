@@ -9,7 +9,6 @@ class User {
 
     // find random number in 1 .. 2^32
     uint32_t generate_x() const;
-    uint64_t exponent_mod(uint64_t base, uint64_t exponent, uint64_t mod) const;
 public:
     User(const uint64_t p, const uint64_t g)
         : p{p}, g{g}, x{generate_x()}

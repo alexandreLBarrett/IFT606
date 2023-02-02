@@ -3,22 +3,9 @@
 #include <random>
 #include <functional>
 
+#include "crypto.h"
+
 using namespace std;
-
-uint64_t User::exponent_mod(uint64_t base, uint64_t exponent, uint64_t mod) const {
-    uint64_t res = 0;
-    base = base % mod;
-
-    while (exponent > 0) {
-        if (exponent % 2 == 1)
-            res = (res + base) % mod;
-
-        base = (base * 2) % mod;
-        exponent /= 2;
-    }
- 
-    return res % mod;
-}
 
 uint32_t User::generate_x() const {
     auto diff = numeric_limits<uint32_t>::max() - uint32_t{1};
