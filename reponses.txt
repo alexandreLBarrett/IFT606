@@ -20,9 +20,35 @@ pas le même secret
 Q2
 
 2.a)
+N = 143, p = 11, q = 13
+
 2.b)
+𝜙(N) = (p-1)(q-1) = 10 * 12 = 120
+Z*143 = tout sauf multiples de 11 et 13
+    142 - 
+    | { 11, 22, 33, 44, 55, 66, 77, 88, 99, 121, 132 } | = 11
+    | { 13, 26, 39, 52, 65, 78, 91, 104, 117, 130 } | = 10
+= 121
+
 2.c)
+e = 7 d = 103
+
+exemple: m = 11
+c = m ^ e mod N = 11 ^ 7 mod 143 = 132
+m = c ^ d mod N = 132 ^ 103 mod 143 = 11
+
+exemple: m = 53
+c = m ^ e mod N = 53 ^ 7 mod 143 = 92
+m = c ^ d mod N = 92 ^ 103 mod 143 = 53
+
 2.d)
+
+chiffrement RSA
+pk = (N, e) = (143, 7)
+sk = (p, q, d) = (11, 13, 103)
+
+signature RSA
+...
 
 Q3
 
