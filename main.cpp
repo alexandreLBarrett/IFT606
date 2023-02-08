@@ -80,6 +80,8 @@ void scenario_man_in_the_middle(uint64_t p, uint64_t g) {
 }
 
 void scenario_rsa_signature() {
+    cout << "-- SCENARIO RSA SIGNATURE --" << endl;
+
     sk alice_secret_key = { 11, 13, 103 };
     pk alice_public_key = { 143, 7 };
 
