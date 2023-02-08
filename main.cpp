@@ -85,15 +85,42 @@ void scenario_rsa_signature() {
     sk alice_secret_key = { 11, 13, 103 };
     pk alice_public_key = { 143, 7 };
 
-    auto test_message = [&](uint64_t message) {
+    auto test_message = [&](uint64_t message, bool eve_modify) {
         uint64_t signature = sign_rsa(alice_secret_key, message);
-        bool valid = verify_rsa(alice_public_key, message, signature);
-        cout << "Message " << message << " was " << (valid ? "accepted" : "rejected") << "\n";
+
+        cout << "--------------------------------------\n"
+            << "Message: " << message << "\n"
+            << "Clé privée de Alice: p = " << alice_secret_key.p << " q = " << alice_secret_key.q << " d = " << alice_secret_key.d << "\n"
+            << "Alice signe le message et obtient la signature " << signature << "\n\n";
+        
+        uint64_t eve_sign = signature;
+        uint64_t eve_message = message;
+        cout << "Clé publique de Eve: N = " << alice_public_key.N << " e = " << alice_public_key.e << "\n";
+        cout << "Eve intercepte le message " << eve_message << " et la signature " << eve_sign << "\n";
+
+        if (eve_modify) {
+            cout << "Eve modife le message...\n";
+            eve_message = (rand() % 142) + 1;
+            cout << "Le message est maintenant: " << eve_message << "\n";
+        } else {
+            cout << "Eve ne fait rien avec le message\n";
+        }
+
+        cout << "\nEve envoie le tout à Bob\n\n";
+        
+        bool valid = verify_rsa(alice_public_key, eve_message, eve_sign);
+
+        cout << "Clé publique de Bob: N = " << alice_public_key.N << " e = " << alice_public_key.e << "\n";
+        cout << "Bob recoit le message " << eve_message << " et la signature " << eve_sign << "\n";
+        cout << "Le bit de validation est à " << (valid ? '1' : '0') << " le message est donc " << (valid ? "accepté" : "rejeté") << "\n";
     };
     
-    test_message(3);
-    test_message(5);
-    test_message(7);
+    cout << "\n";
+    test_message(3, false);
+    cout << "\n";
+    test_message(5, false);
+    cout << "\n";
+    test_message(7, true);
 }
 
 

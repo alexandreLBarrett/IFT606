@@ -8,13 +8,12 @@ uint64_t exponent_mod(uint64_t base, uint64_t exponent, uint64_t mod) {
             result = (result * base) % mod;
 
         exponent >>= 1;
-        
+
         base = (base * base) % mod;
     }
 
     return result;
 }
-
 
 uint64_t sign_rsa(const sk& secret_key, uint64_t message) {
     return exponent_mod(message, secret_key.d, secret_key.p * secret_key.q);
