@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "user.h"
+#include "crypto.h"
 
 using namespace std;
 
@@ -78,6 +79,21 @@ void scenario_man_in_the_middle(uint64_t p, uint64_t g) {
     cout << "\n";
 }
 
+void scenario_rsa_signature() {
+    sk alice_secret_key = { 11, 13, 103 };
+    pk alice_public_key = { 143, 7 };
+
+    auto test_message = [&](uint64_t message) {
+        uint64_t signature = sign_rsa(alice_secret_key, message);
+        bool valid = verify_rsa(alice_public_key, message, signature);
+        cout << "Message " << message << " was " << (valid ? "accepted" : "rejected") << "\n";
+    };
+    
+    test_message(3);
+    test_message(5);
+    test_message(7);
+}
+
 
 int main(int argc, char** argv) {
     vector<string> args = { argv, argv + argc };
@@ -98,4 +114,5 @@ int main(int argc, char** argv) {
 
     scenario_base(p, g);
     scenario_man_in_the_middle(p, g);
+    scenario_rsa_signature();
 }

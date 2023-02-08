@@ -1,8 +1,8 @@
-#include "user.h"
 #include <math.h>
 #include <random>
 #include <functional>
 
+#include "user.h"
 #include "crypto.h"
 
 using namespace std;
